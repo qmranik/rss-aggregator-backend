@@ -1,0 +1,152 @@
+# github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
+## explicit; go 1.12
+github.com/araddon/dateparse
+# github.com/dgrijalva/jwt-go v3.2.0+incompatible
+## explicit
+github.com/dgrijalva/jwt-go
+# github.com/go-chi/chi v1.5.4
+## explicit; go 1.16
+github.com/go-chi/chi
+# github.com/go-chi/cors v1.2.1
+## explicit; go 1.14
+github.com/go-chi/cors
+# github.com/google/uuid v1.3.0
+## explicit
+github.com/google/uuid
+# github.com/joho/godotenv v1.5.1
+## explicit; go 1.12
+github.com/joho/godotenv
+# github.com/lib/pq v1.10.9
+## explicit; go 1.13
+github.com/lib/pq
+github.com/lib/pq/oid
+github.com/lib/pq/scram
+# github.com/sirupsen/logrus v1.9.3
+## explicit; go 1.13
+github.com/sirupsen/logrus
+# github.com/stripe/stripe-go/v72 v72.122.0
+## explicit; go 1.13
+github.com/stripe/stripe-go/v72
+github.com/stripe/stripe-go/v72/account
+github.com/stripe/stripe-go/v72/accountlink
+github.com/stripe/stripe-go/v72/applepaydomain
+github.com/stripe/stripe-go/v72/apps/secret
+github.com/stripe/stripe-go/v72/balance
+github.com/stripe/stripe-go/v72/balancetransaction
+github.com/stripe/stripe-go/v72/bankaccount
+github.com/stripe/stripe-go/v72/billingportal/configuration
+github.com/stripe/stripe-go/v72/billingportal/session
+github.com/stripe/stripe-go/v72/capability
+github.com/stripe/stripe-go/v72/card
+github.com/stripe/stripe-go/v72/cashbalance
+github.com/stripe/stripe-go/v72/charge
+github.com/stripe/stripe-go/v72/checkout/session
+github.com/stripe/stripe-go/v72/client
+github.com/stripe/stripe-go/v72/countryspec
+github.com/stripe/stripe-go/v72/coupon
+github.com/stripe/stripe-go/v72/creditnote
+github.com/stripe/stripe-go/v72/customer
+github.com/stripe/stripe-go/v72/customerbalancetransaction
+github.com/stripe/stripe-go/v72/discount
+github.com/stripe/stripe-go/v72/dispute
+github.com/stripe/stripe-go/v72/ephemeralkey
+github.com/stripe/stripe-go/v72/event
+github.com/stripe/stripe-go/v72/fee
+github.com/stripe/stripe-go/v72/feerefund
+github.com/stripe/stripe-go/v72/file
+github.com/stripe/stripe-go/v72/filelink
+github.com/stripe/stripe-go/v72/financialconnections/account
+github.com/stripe/stripe-go/v72/financialconnections/session
+github.com/stripe/stripe-go/v72/form
+github.com/stripe/stripe-go/v72/identity/verificationreport
+github.com/stripe/stripe-go/v72/identity/verificationsession
+github.com/stripe/stripe-go/v72/invoice
+github.com/stripe/stripe-go/v72/invoiceitem
+github.com/stripe/stripe-go/v72/issuing/authorization
+github.com/stripe/stripe-go/v72/issuing/card
+github.com/stripe/stripe-go/v72/issuing/cardholder
+github.com/stripe/stripe-go/v72/issuing/dispute
+github.com/stripe/stripe-go/v72/issuing/transaction
+github.com/stripe/stripe-go/v72/lineitem
+github.com/stripe/stripe-go/v72/loginlink
+github.com/stripe/stripe-go/v72/mandate
+github.com/stripe/stripe-go/v72/oauth
+github.com/stripe/stripe-go/v72/order
+github.com/stripe/stripe-go/v72/orderreturn
+github.com/stripe/stripe-go/v72/paymentintent
+github.com/stripe/stripe-go/v72/paymentlink
+github.com/stripe/stripe-go/v72/paymentmethod
+github.com/stripe/stripe-go/v72/paymentsource
+github.com/stripe/stripe-go/v72/payout
+github.com/stripe/stripe-go/v72/person
+github.com/stripe/stripe-go/v72/plan
+github.com/stripe/stripe-go/v72/price
+github.com/stripe/stripe-go/v72/product
+github.com/stripe/stripe-go/v72/promotioncode
+github.com/stripe/stripe-go/v72/quote
+github.com/stripe/stripe-go/v72/radar/earlyfraudwarning
+github.com/stripe/stripe-go/v72/radar/valuelist
+github.com/stripe/stripe-go/v72/radar/valuelistitem
+github.com/stripe/stripe-go/v72/refund
+github.com/stripe/stripe-go/v72/reporting/reportrun
+github.com/stripe/stripe-go/v72/reporting/reporttype
+github.com/stripe/stripe-go/v72/reversal
+github.com/stripe/stripe-go/v72/review
+github.com/stripe/stripe-go/v72/setupattempt
+github.com/stripe/stripe-go/v72/setupintent
+github.com/stripe/stripe-go/v72/shippingrate
+github.com/stripe/stripe-go/v72/sigma/scheduledqueryrun
+github.com/stripe/stripe-go/v72/sku
+github.com/stripe/stripe-go/v72/source
+github.com/stripe/stripe-go/v72/sourcetransaction
+github.com/stripe/stripe-go/v72/sub
+github.com/stripe/stripe-go/v72/subitem
+github.com/stripe/stripe-go/v72/subschedule
+github.com/stripe/stripe-go/v72/taxcode
+github.com/stripe/stripe-go/v72/taxid
+github.com/stripe/stripe-go/v72/taxrate
+github.com/stripe/stripe-go/v72/terminal/configuration
+github.com/stripe/stripe-go/v72/terminal/connectiontoken
+github.com/stripe/stripe-go/v72/terminal/location
+github.com/stripe/stripe-go/v72/terminal/reader
+github.com/stripe/stripe-go/v72/testhelpers/customer
+github.com/stripe/stripe-go/v72/testhelpers/issuing/card
+github.com/stripe/stripe-go/v72/testhelpers/refund
+github.com/stripe/stripe-go/v72/testhelpers/terminal/reader
+github.com/stripe/stripe-go/v72/testhelpers/testclock
+github.com/stripe/stripe-go/v72/testhelpers/treasury/inboundtransfer
+github.com/stripe/stripe-go/v72/testhelpers/treasury/outboundpayment
+github.com/stripe/stripe-go/v72/testhelpers/treasury/outboundtransfer
+github.com/stripe/stripe-go/v72/testhelpers/treasury/receivedcredit
+github.com/stripe/stripe-go/v72/testhelpers/treasury/receiveddebit
+github.com/stripe/stripe-go/v72/token
+github.com/stripe/stripe-go/v72/topup
+github.com/stripe/stripe-go/v72/transfer
+github.com/stripe/stripe-go/v72/treasury/creditreversal
+github.com/stripe/stripe-go/v72/treasury/debitreversal
+github.com/stripe/stripe-go/v72/treasury/financialaccount
+github.com/stripe/stripe-go/v72/treasury/inboundtransfer
+github.com/stripe/stripe-go/v72/treasury/outboundpayment
+github.com/stripe/stripe-go/v72/treasury/outboundtransfer
+github.com/stripe/stripe-go/v72/treasury/receivedcredit
+github.com/stripe/stripe-go/v72/treasury/receiveddebit
+github.com/stripe/stripe-go/v72/treasury/transaction
+github.com/stripe/stripe-go/v72/treasury/transactionentry
+github.com/stripe/stripe-go/v72/usagerecord
+github.com/stripe/stripe-go/v72/usagerecordsummary
+github.com/stripe/stripe-go/v72/webhookendpoint
+# github.com/stripe/stripe-go/v74 v74.30.0
+## explicit; go 1.13
+github.com/stripe/stripe-go/v74
+github.com/stripe/stripe-go/v74/form
+github.com/stripe/stripe-go/v74/paymentintent
+github.com/stripe/stripe-go/v74/refund
+github.com/stripe/stripe-go/v74/webhook
+# golang.org/x/crypto v0.26.0
+## explicit; go 1.20
+golang.org/x/crypto/bcrypt
+golang.org/x/crypto/blowfish
+# golang.org/x/sys v0.23.0
+## explicit; go 1.18
+golang.org/x/sys/unix
+golang.org/x/sys/windows
