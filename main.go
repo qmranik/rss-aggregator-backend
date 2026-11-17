@@ -1,19 +1,21 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 	"github.com/qmranik/rss-aggregator-backend/handlers"
-	"github.com/qmranik/rss-aggregator-backend/helper"
+	"github.com/qmranik/rss-aggregator-backend/internal/ai"
 	"github.com/qmranik/rss-aggregator-backend/internal/auth"
 	"github.com/qmranik/rss-aggregator-backend/internal/database"
+	"github.com/qmranik/rss-aggregator-backend/internal/queue"
 	"github.com/qmranik/rss-aggregator-backend/internal/stripe"
 
 	_ "github.com/lib/pq"
@@ -96,17 +98,19 @@ func main() {
 	v1Router.Post("/logout", userHandler.Logout)
 	v1Router.Get("/user", authenticator.MiddlewareAuth(apiCfg.HandlerGetUser))
 
-	// Feed Routes
-	v1Router.Post("/feeds", authenticator.MiddlewareAuth(apiCfg.HandlerFeedCreate))
-	v1Router.Get("/feeds", apiCfg.HandlerGetFeeds)
+	// Source Routes
+	v1Router.Post("/sources", authenticator.MiddlewareAuth(apiCfg.HandlerSourceCreate))
+	v1Router.Get("/sources", apiCfg.HandlerGetSources)
 
-	// Feed Follow Routes
-	v1Router.Get("/feed_follows", authenticator.MiddlewareAuth(apiCfg.HandlerFeedFollowsGet))
-	v1Router.Post("/feed_follows", authenticator.MiddlewareAuth(apiCfg.HandlerFeedFollowCreate))
-	v1Router.Delete("/feed_follows/{feedFollowID}", authenticator.MiddlewareAuth(apiCfg.HandlerFeedFollowDelete))
+	// Source Follow Routes
+	v1Router.Get("/source_follows", authenticator.MiddlewareAuth(apiCfg.HandlerSourceFollowsGet))
+	v1Router.Post("/source_follows", authenticator.MiddlewareAuth(apiCfg.HandlerSourceFollowCreate))
+	v1Router.Delete("/source_follows/{sourceFollowID}", authenticator.MiddlewareAuth(apiCfg.HandlerSourceFollowDelete))
 
 	// Post Routes
 	v1Router.Get("/posts", authenticator.MiddlewareAuth(apiCfg.HandlerPostsGet))
+
+	v1Router.Post("/chat", authenticator.MiddlewareAuth(apiCfg.HandlerChat))
 
 	// Payment Routes
 	v1Router.Post("/create-payment-intent", authenticator.MiddlewareAuth(paymentHandler.CreatePaymentIntent))
@@ -125,10 +129,26 @@ func main() {
 		Handler: router,
 	}
 
-	// Start background tasks for scraping
-	const collectionConcurrency = 10
-	const collectionInterval = time.Minute
-	go helper.StartScraping(dbQueries, collectionConcurrency, collectionInterval)
+	// Initialize Queue Worker and Client
+	redisURL := os.Getenv("REDIS_URL")
+	if redisURL == "" {
+		redisURL = "localhost:6379"
+	}
+	queueClient := queue.NewClient(redisURL)
+	defer queueClient.Close()
+
+	aiClient, err := ai.NewClient(context.Background())
+	if err != nil {
+		log.Printf("Warning: Failed to initialize AI client: %v", err)
+	}
+
+	queueWorker := queue.NewWorker(redisURL, dbQueries, aiClient, 10)
+	go queueWorker.Start()
+	defer queueWorker.Stop()
+
+	// Start background tasks for scheduling
+	const schedulingInterval = time.Minute
+	go queue.StartScheduling(dbQueries, queueClient, schedulingInterval)
 
 	log.Printf("Serving on port: %s\n", port)
 	log.Fatal(srv.ListenAndServe())

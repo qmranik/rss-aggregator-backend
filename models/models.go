@@ -8,10 +8,12 @@ import (
 	"github.com/qmranik/rss-aggregator-backend/internal/database"
 )
 
-// Parameters represents a set of parameters for feed creation or updates.
-type Parameters struct {
-	Name string `json:"name"`
-	URL  string `json:"url"`
+// SourceParameters represents a set of parameters for source creation or updates.
+type SourceParameters struct {
+	Name          string `json:"name"`
+	URL           string `json:"url"`
+	SourceType    string `json:"source_type"`
+	FetchInterval string `json:"fetch_interval"`
 }
 
 // UserPram represents user credentials for login or registration.

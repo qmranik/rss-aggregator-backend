@@ -16,7 +16,9 @@ type Post struct {
 	Url         string     `json:"url"`
 	Description *string    `json:"description"`
 	PublishedAt *time.Time `json:"published_at"`
-	FeedID      uuid.UUID  `json:"feed_id"`
+	SourceID    uuid.UUID  `json:"source_id"`
+	RawContent  *string    `json:"raw_content"`
+	AiSummary   *string    `json:"ai_summary"`
 }
 
 // DatabasePostToPost converts a database.Post to a Post model.
@@ -29,7 +31,9 @@ func DatabasePostToPost(post database.Post) Post {
 		Url:         post.Url,
 		Description: NullStringToStringPtr(post.Description),
 		PublishedAt: NullTimeToTimePtr(post.PublishedAt),
-		FeedID:      post.FeedID,
+		SourceID:    post.SourceID,
+		RawContent:  NullStringToStringPtr(post.RawContent),
+		AiSummary:   NullStringToStringPtr(post.AiSummary),
 	}
 }
 

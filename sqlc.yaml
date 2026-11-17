@@ -6,3 +6,6 @@ sql:
     gen:
       go:
         out: "internal/database"
+        overrides:
+          - db_type: vector
+            go_type: github.com/pgvector/pgvector-go.Vector

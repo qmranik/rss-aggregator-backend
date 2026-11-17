@@ -1,7 +1,7 @@
 package stripe
 
 import (
-	"github.com/stripe/stripe-go/v72/client"
+	"github.com/stripe/stripe-go/v74/client"
 )
 
 // StripeClient wraps the Stripe API client

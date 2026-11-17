@@ -2,11 +2,11 @@
 
 ## Overview
 
-This project is an RSS Aggregator that enables users to follow and keep up with their favorite blog posts by collecting RSS feeds. The aggregator periodically (every 10 minutes) checks for new or updated feeds and stores them in a PostgreSQL database. Additionally, the backend supports user authentication using JWT tokens, integrates Stripe for payment processing, and provides robust logging and error handling.
+This project is an RSS Aggregator that enables users to follow and keep up with their favorite blog posts by collecting RSS feeds. The aggregator checks each source on its own configurable schedule (hourly, daily, weekly, or monthly) and stores new items in a PostgreSQL database. Additionally, the backend supports user authentication using JWT tokens, integrates Stripe for payment processing, and provides robust logging and error handling.
 
 ## Features
 
-- **RSS Feed Aggregation:** Collects and updates RSS feeds every 10 minutes.
+- **Multi-Source Aggregation:** Collects and updates sources on a per-source schedule (hourly / daily / weekly / monthly).
 - **User Authentication:** JWT-based authentication with refresh tokens.
 - **Payment Integration:** Supports Stripe for payment processing, including refunds and webhooks for payment validation.
 - **Database:** Uses PostgreSQL for storing users, feeds, sessions, and payment data.
@@ -143,4 +143,4 @@ This project is an RSS Aggregator that enables users to follow and keep up with 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Reference
-This project is an RSS Aggregator backend service, inspired from [this video](https://www.youtube.com/watch?v=un6ZyFkqFKo) by Lane Wagner but modified to include advanced features such as JWT authentication, PostgreSQL database, and full Stripe payment integration. The service allows users to follow RSS feeds, which are fetched concurrently every 10 minutes, and stores the data in a PostgreSQL database.
+This project is an RSS Aggregator backend service, inspired from [this video](https://www.youtube.com/watch?v=un6ZyFkqFKo) by Lane Wagner but modified to include advanced features such as JWT authentication, PostgreSQL database, and full Stripe payment integration. The service allows users to follow sources, which are fetched concurrently on their configured schedule, and stores the data in a PostgreSQL database.

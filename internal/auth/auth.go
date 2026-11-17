@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	"github.com/qmranik/rss-aggregator-backend/internal/database"
 	log "github.com/sirupsen/logrus"
@@ -22,7 +22,7 @@ type Authenticator struct {
 
 type Claims struct {
 	UserUUID string `json:"user_uuid"`
-	jwt.StandardClaims
+	jwt.RegisteredClaims
 }
 
 // VerifyUsername checks if a username exists in the database.
@@ -97,7 +97,7 @@ func (auth *Authenticator) RefreshToken(refreshToken string) (string, error) {
 	claims := &Claims{}
 	token, err := jwt.ParseWithClaims(refreshToken, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte(auth.JWTRefreshKey), nil
-	})
+	}, jwt.WithValidMethods([]string{jwt.SigningMethodHS256.Alg()}))
 	if err != nil || !token.Valid {
 		log.WithError(err).Warn("Invalid refresh token")
 		return "", errors.New("invalid refresh token")
@@ -150,7 +150,7 @@ func (auth *Authenticator) Authenticate(tokenString string) (string, error) {
 	claims := &Claims{}
 	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte(auth.JWTSecretKey), nil
-	})
+	}, jwt.WithValidMethods([]string{jwt.SigningMethodHS256.Alg()}))
 	if err != nil || !token.Valid {
 		log.WithError(err).Warn("Invalid token")
 		return "", errors.New("invalid token")
@@ -164,8 +164,9 @@ func (auth *Authenticator) Authenticate(tokenString string) (string, error) {
 func (auth *Authenticator) generateJWT(subject string, ttl time.Duration, secretKey string) (string, error) {
 	claims := &Claims{
 		UserUUID: subject,
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(ttl).Unix(),
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(ttl)),
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
 		},
 	}
 
